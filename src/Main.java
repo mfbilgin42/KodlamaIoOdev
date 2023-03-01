@@ -7,6 +7,7 @@ import core.logging.concretes.MailLogger;
 import dataAccess.concretes.category.HibernateCategoryDao;
 import dataAccess.concretes.category.JdbcCategoryDao;
 import dataAccess.concretes.course.HibernateCourseDao;
+import dataAccess.concretes.course.JdbcCourseDao;
 import dataAccess.concretes.instructor.HibernateInstructorDao;
 import dataAccess.concretes.instructor.JdbcInstructorDao;
 import entities.Category;
@@ -30,7 +31,7 @@ public class Main {
         Course course2 = new Course(2, 1, "Course 2", "Instructor", "Description", 0);
         //Define CourseManagers
         CourseManager courseManagerWithHibernate = new CourseManager(new HibernateCourseDao(), new MailLogger());
-        CourseManager courseManagerWithJdbc = new CourseManager(new HibernateCourseDao(), new DatabaseLogger());
+        CourseManager courseManagerWithJdbc = new CourseManager(new JdbcCourseDao(), new DatabaseLogger());
         //Add Courses
         courseManagerWithHibernate.add(course);
         courseManagerWithJdbc.add(course2);
