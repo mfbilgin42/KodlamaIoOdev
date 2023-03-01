@@ -3,17 +3,18 @@ package business.concretes;
 import business.abstracts.CategoryService;
 import core.logging.abstracts.Logger;
 import dataAccess.abstracts.CategoryDao;
+import dataAccess.concretes.category.HibernateCategoryDao;
 import entities.Category;
 
 import java.util.List;
 
 public class CategoryManager implements CategoryService {
     private final CategoryDao categoryDao;
-    private final Logger logger;
+    private final List<Logger> loggers;
 
-    public CategoryManager(CategoryDao categoryDao, Logger logger) {
+    public CategoryManager(CategoryDao categoryDao, List<Logger> loggers) {
         this.categoryDao = categoryDao;
-        this.logger = logger;
+        this.loggers = loggers;
     }
     public void add(Category category) throws Exception {
         List<Category> categories = categoryDao.getAll();
@@ -23,8 +24,11 @@ public class CategoryManager implements CategoryService {
                 throw new Exception("Category already exists");
             }
         }
+        HibernateCategoryDao categoryDao = new HibernateCategoryDao();
         categoryDao.add(category);
-        logger.log("Category added: " + category.getName());
+        for (Logger logger : loggers) {
+            logger.log(category.getName() + " added");
+        }
     }
 
     @Override

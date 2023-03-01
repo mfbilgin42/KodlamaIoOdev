@@ -9,15 +9,18 @@ import java.util.List;
 
 public class InstructorManager implements InstructorService{
     private final InstructorDao instructorDao;
-    private final Logger logger;
-    public InstructorManager(InstructorDao instructorDao, Logger logger) {
+    private final List<Logger> loggers;
+    public InstructorManager(InstructorDao instructorDao, List<Logger> loggers) {
         this.instructorDao = instructorDao;
-        this.logger = logger;
+        this.loggers = loggers;
     }
 
     @Override
     public void add(Instructor instructor) throws Exception {
         instructorDao.add(instructor);
+        for (Logger logger : loggers) {
+            logger.log(instructor.getFirstName() + " " + instructor.getSurname() + " added");
+        }
     }
 
     @Override

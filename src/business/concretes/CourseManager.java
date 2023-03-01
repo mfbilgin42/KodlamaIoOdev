@@ -9,11 +9,11 @@ import java.util.List;
 
 public class CourseManager implements CourseService {
     private final CourseDao courseDao;
-    private final Logger logger;
+    private final List<Logger> loggers;
 
-    public CourseManager(CourseDao courseDao, Logger logger) {
+    public CourseManager(CourseDao courseDao, List<Logger> loggers) {
         this.courseDao = courseDao;
-        this.logger = logger;
+        this.loggers = loggers;
     }
 
     @Override
@@ -28,7 +28,9 @@ public class CourseManager implements CourseService {
             throw new Exception("Course price cannot be negative");
         }
         courseDao.add(course);
-        logger.log("Course added: " + course.getName());
+        for (Logger logger : loggers) {
+            logger.log(course.getName() + " added");
+        }
     }
 
     @Override

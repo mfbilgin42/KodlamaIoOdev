@@ -19,5 +19,7 @@ public class Instructor {
         return firstName;
     }
 
-
+    public String getSurname() {
+        return surname;
+    }
 }
