@@ -14,8 +14,8 @@ public class HibernateCourseDao implements CourseDao {
     @Override
     public List<Course> getAll() {
         return List.of(
-                new Course(1, "Java ile backend geliştirme", "Engin Demiroğ", "Java ile backend geliştirme", 0),
-                new Course(2, "C# ile backend geliştirme", "Engin Demiroğ", "C# ile backend geliştirme", 0)
+                new Course(1,1, "Java ile backend geliştirme", "Engin Demiroğ", "Java ile backend geliştirme", 0),
+                new Course(2,1, "C# ile backend geliştirme", "Engin Demiroğ", "C# ile backend geliştirme", 0)
         );
     }
 }
