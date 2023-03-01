@@ -1,6 +1,7 @@
 package business.concretes;
 
 import business.abstracts.CourseService;
+import core.logging.abstracts.Logger;
 import dataAccess.abstracts.CourseDao;
 import entities.Course;
 
@@ -8,9 +9,11 @@ import java.util.List;
 
 public class CourseManager implements CourseService {
     private final CourseDao courseDao;
+    private final Logger logger;
 
-    public CourseManager(CourseDao courseDao) {
+    public CourseManager(CourseDao courseDao, Logger logger) {
         this.courseDao = courseDao;
+        this.logger = logger;
     }
 
     @Override
@@ -25,6 +28,7 @@ public class CourseManager implements CourseService {
             throw new Exception("Course price cannot be negative");
         }
         courseDao.add(course);
+        logger.log("Course added: " + course.getName());
     }
 
     @Override
